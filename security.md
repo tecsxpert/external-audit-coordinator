@@ -31,7 +31,9 @@ The AI may be manipulated into bypassing intended behavior.
 - Validate inputs before sending to Groq
 - Reject malicious requests with HTTP 400
 
-Status: Planned
+Status: Implemented
+
+Implementation: `input_sanitization.py` provides Flask middleware that strips HTML tags, detects prompt injection patterns, and returns HTTP 400 with a clear error message.
 
 ---
 
@@ -97,7 +99,9 @@ Attacker floods AI endpoints with excessive requests.
 - 10 requests/min for /generate-report
 - Return HTTP 429 when exceeded
 
-Status: Planned
+Status: Implemented
+
+Implementation: `rate_limiting.py` configures Flask-Limiter with default 30 req/min, 10 req/min on /generate-report, and returns 429 with retry_after header.
 
 ---
 
@@ -116,7 +120,9 @@ Personal or confidential audit data gets stored in prompts or logs.
 - No secrets in GitHub
 - Use environment variables only
 
-Status: Planned
+Status: Implemented
+
+Implementation: PII audit conducted - no personal data found in prompts or application logs. Input sanitization prevents PII injection. No logging of user prompts implemented.
 
 ---
 
@@ -124,10 +130,10 @@ Status: Planned
 
 | Test | Result |
 |------|--------|
-Prompt Injection | Pending |
-SQL Injection | Pending |
+Prompt Injection | Pass |
+SQL Injection | Pass |
 XSS | Pending |
-Empty Input | Pending |
+Empty Input | Pass |
 Rate Limit | Pending |
 
 ---
@@ -206,9 +212,6 @@ Attacker rotates IPs or scripts requests to bypass request-per-minute limits.
 - Detect repeated abuse patterns
 - Log and block suspicious clients
 
-Status: Planned
-
----
 
 ## 9. Unauthorized AI Endpoint Access
 
