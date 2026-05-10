@@ -251,3 +251,30 @@ that get retrieved by RAG.
 - Detect instruction-like patterns
 - Filter malicious chunks
 - Review retrieved context before model call
+
+
+## Security Review Validation
+
+### Infrastructure Validation
+- Docker container validation completed successfully
+- PostgreSQL container verified running on port 5432
+
+### Planned Security Validation
+The following security validations are planned during integration testing:
+
+| Test Case | Expected Result |
+|-----------|----------------|
+| Missing JWT | 401 Unauthorized |
+| Invalid Role Access | 403 Forbidden |
+| Invalid Endpoint | 404 Not Found |
+| SQL Injection Attempt | 400 Bad Request |
+| Excess Requests | 429 Too Many Requests |
+
+### Reviewer Notes
+- Initial infrastructure validation completed successfully
+- Full API security testing pending final integrated deployment
+- OWASP ZAP validation planned after endpoint availability
+
+
+Security Reviewer:
+SAMANVITHA CM
